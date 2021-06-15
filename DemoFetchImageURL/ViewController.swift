@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ViewController: UIViewController {
     
@@ -21,32 +22,44 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(imageView)
         imageView.center = view.center
         
-        fetchImage()
+        /* with library SDWebImage */
+        imageView.sd_setImage(with: URL(string: urlString), completed: nil)
+        
     }
     
-    private func fetchImage() {
-        // get data
-        // convertthe data to image
-        // set image to imageview
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        let getDataTask = URLSession.shared.dataTask(with: url){ data, _, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            DispatchQueue.main.async {
-                let image = UIImage(data: data)
-                self.imageView.image = image
-            }
-        }
-        
-        getDataTask.resume()
-    }
+    // ** Fundamental function download image from URL **
+    
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//
+//        view.addSubview(imageView)
+//        imageView.center = view.center
+//
+//        fetchImage()
+//    }
+//
+//    private func fetchImage() {
+//        // get data
+//        // convertthe data to image
+//        // set image to imageview
+//        guard let url = URL(string: urlString) else {
+//            return
+//        }
+//        let getDataTask = URLSession.shared.dataTask(with: url){ data, _, error in
+//            guard let data = data, error == nil else {
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                let image = UIImage(data: data)
+//                self.imageView.image = image
+//            }
+//        }
+//
+//        getDataTask.resume()
+//    }
 
 
 }
